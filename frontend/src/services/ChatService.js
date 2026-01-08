@@ -2,7 +2,7 @@ import axios from "axios";
 import auth from "../config/firebase";
 import { io } from "socket.io-client";
 
-const baseURL = "http://localhost:5000/api"; // Changed from 3001 to 5000
+const baseURL = `${process.env.REACT_APP_API_URL}/api`; // Changed from 3001 to 5000
 
 const getUserToken = async () => {
   const user = auth.currentUser;
@@ -13,7 +13,7 @@ const getUserToken = async () => {
 export const initiateSocketConnection = async () => {
   const token = await getUserToken();
 
-  const socket = io("http://localhost:5000", { // Changed from 3001 to 5000
+  const socket = io(process.env.REACT_APP_API_URL, { // Changed from 3001 to 5000
     auth: {
       token,
     },
